@@ -1,0 +1,49 @@
+# SOP Recorder - Git Ignore
+
+# Backend
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/config/database.php
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+error_log
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+*.swo
+*~
+
+# Dependencies (if using Composer later)
+vendor/
+composer.lock
+
+# Node modules (if adding build tools later)
+node_modules/
+package-lock.json
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+
+# Database dumps
+*.sql.gz
+*.sql.zip
+database/backup/
+
+# Sensitive
+config-local.php
+secrets.json

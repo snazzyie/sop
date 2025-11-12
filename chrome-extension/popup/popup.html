@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOP Recorder</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>SOP Recorder</h1>
+      <div class="version">v1.0.0</div>
+    </div>
+
+    <!-- Authentication Section -->
+    <div id="auth-section" class="section" style="display: none;">
+      <h2>Login Required</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+      <p class="help-text">
+        Don't have an account?
+        <a href="#" id="open-webapp">Sign up</a>
+      </p>
+      <div id="auth-error" class="error-message" style="display: none;"></div>
+    </div>
+
+    <!-- Recording Controls Section -->
+    <div id="recording-section" class="section" style="display: none;">
+      <!-- Not Recording State -->
+      <div id="idle-state">
+        <div class="status-indicator idle">
+          <div class="status-dot"></div>
+          <span>Ready to record</span>
+        </div>
+
+        <div class="recording-options">
+          <h3>Recording Options</h3>
+          <label class="checkbox-label">
+            <input type="checkbox" id="capture-keystrokes">
+            <span>Capture keystrokes</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="privacy-mode" checked>
+            <span>Privacy mode (blur sensitive data)</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="current-tab-only" checked>
+            <span>Current tab only</span>
+          </label>
+        </div>
+
+        <button id="start-btn" class="btn btn-large btn-success">
+          <span class="btn-icon">●</span>
+          Start Recording
+        </button>
+      </div>
+
+      <!-- Recording State -->
+      <div id="recording-state" style="display: none;">
+        <div class="status-indicator recording">
+          <div class="status-dot pulse"></div>
+          <span>Recording in progress</span>
+        </div>
+
+        <div class="recording-info">
+          <div class="info-item">
+            <span class="label">Steps captured:</span>
+            <span id="step-count" class="value">0</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Duration:</span>
+            <span id="duration" class="value">00:00</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Session ID:</span>
+            <span id="session-id" class="value">-</span>
+          </div>
+        </div>
+
+        <button id="stop-btn" class="btn btn-large btn-danger">
+          <span class="btn-icon">■</span>
+          Stop Recording
+        </button>
+      </div>
+
+      <!-- Success State -->
+      <div id="success-state" style="display: none;">
+        <div class="success-message">
+          <div class="success-icon">✓</div>
+          <h3>SOP Created Successfully!</h3>
+          <p>Your step-by-step guide has been generated.</p>
+        </div>
+
+        <button id="view-sop-btn" class="btn btn-primary btn-large">
+          View & Edit SOP
+        </button>
+
+        <button id="new-recording-btn" class="btn btn-secondary">
+          Create Another SOP
+        </button>
+      </div>
+
+      <!-- User Info -->
+      <div class="user-info">
+        <div class="user-email" id="user-email">user@email.com</div>
+        <button id="logout-btn" class="btn btn-text">Logout</button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-section" class="section" style="display: none;">
+      <div class="loading-spinner"></div>
+      <p id="loading-text">Loading...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="error-message" style="display: none;"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View SOP - SOP Recorder</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>SOP Recorder</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">← Back to Dashboard</a>
+                <button id="edit-btn" class="btn btn-sm btn-primary">Edit SOP</button>
+                <button id="share-btn" class="btn btn-sm btn-secondary">Share</button>
+                <button id="export-btn" class="btn btn-sm btn-secondary">Export</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Loading -->
+        <div id="loading-state" class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading SOP...</p>
+        </div>
+
+        <!-- SOP Content -->
+        <div id="sop-content" style="display: none;">
+            <!-- Header -->
+            <div class="sop-header">
+                <h1 id="sop-title">SOP Title</h1>
+                <p id="sop-description" class="sop-description">Description here...</p>
+
+                <div class="sop-meta">
+                    <span class="meta-item">
+                        <strong>Created:</strong> <span id="sop-created"></span>
+                    </span>
+                    <span class="meta-item">
+                        <strong>Steps:</strong> <span id="sop-steps-count"></span>
+                    </span>
+                    <span class="meta-item">
+                        <strong>Views:</strong> <span id="sop-views"></span>
+                    </span>
+                    <span class="meta-item">
+                        <strong>Status:</strong> <span id="sop-status" class="badge"></span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div id="steps-container" class="steps-container">
+                <!-- Steps will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="error-state" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <h3>SOP Not Found</h3>
+            <p id="error-message">This SOP doesn't exist or you don't have permission to view it.</p>
+            <a href="../index.html" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="export-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Export SOP</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Choose export format:</p>
+                <div class="export-options">
+                    <button class="export-option" data-format="pdf">
+                        <div class="export-icon">📄</div>
+                        <div>PDF Document</div>
+                    </button>
+                    <button class="export-option" data-format="html">
+                        <div class="export-icon">🌐</div>
+                        <div>HTML File</div>
+                    </button>
+                    <button class="export-option" data-format="markdown">
+                        <div class="export-icon">📝</div>
+                        <div>Markdown</div>
+                    </button>
+                </div>
+                <div id="export-progress" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generating export...</p>
+                </div>
+                <div id="export-result" style="display: none;">
+                    <p class="success-message">✓ Export created successfully!</p>
+                    <a id="download-link" href="#" class="btn btn-primary" download>Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/view.js"></script>
+</body>
+</html>

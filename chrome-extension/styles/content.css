@@ -1,0 +1,31 @@
+/* Content Script Styles */
+
+/* Recording indicator pulse animation */
+@keyframes sop-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Highlight animation */
+@keyframes sop-highlight-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Override to ensure visibility */
+#sop-recording-indicator * {
+  all: initial;
+  font-family: Arial, sans-serif;
+}
+
+#sop-element-highlight {
+  animation: sop-highlight-fade 1s ease-out;
+}

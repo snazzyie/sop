@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Recorder - Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>SOP Recorder</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">My SOPs</a>
+                <a href="#" class="nav-link" id="logout-btn">Logout</a>
+            </div>
+            <div class="nav-user">
+                <span id="user-email">user@email.com</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Header -->
+        <div class="page-header">
+            <h2>My Standard Operating Procedures</h2>
+            <div class="header-actions">
+                <input type="text" id="search-input" placeholder="Search SOPs..." class="search-input">
+                <select id="status-filter" class="filter-select">
+                    <option value="">All Status</option>
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                    <option value="archived">Archived</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SOPs Grid -->
+        <div id="sops-container" class="sops-grid">
+            <!-- SOPs will be loaded here -->
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading your SOPs...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <div class="empty-icon">📋</div>
+            <h3>No SOPs Yet</h3>
+            <p>Start recording your first process with the Chrome extension!</p>
+            <a href="#" class="btn btn-primary">Install Extension</a>
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="pagination" style="display: none;">
+            <button id="prev-page" class="btn btn-secondary">Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-page" class="btn btn-secondary">Next</button>
+        </div>
+    </div>
+
+    <!-- Modal for Share -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share SOP</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Visibility</label>
+                    <select id="share-visibility" class="form-control">
+                        <option value="link-only">Anyone with link</option>
+                        <option value="password">Password protected</option>
+                        <option value="public">Public</option>
+                    </select>
+                </div>
+
+                <div id="password-group" class="form-group" style="display: none;">
+                    <label>Password</label>
+                    <input type="password" id="share-password" class="form-control" placeholder="Enter password">
+                </div>
+
+                <div class="form-group">
+                    <label>Expiration (optional)</label>
+                    <input type="datetime-local" id="share-expiry" class="form-control">
+                </div>
+
+                <div id="share-result" style="display: none;">
+                    <label>Share URL:</label>
+                    <div class="share-url-box">
+                        <input type="text" id="share-url" class="form-control" readonly>
+                        <button id="copy-url-btn" class="btn btn-sm">Copy</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="create-share-btn" class="btn btn-primary">Create Share Link</button>
+                <button class="modal-close btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
