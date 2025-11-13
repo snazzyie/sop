@@ -69,7 +69,13 @@ function fn_core_router($uri) {
 
         // Errors
         '/404' => 'errors/404',
-        '/403' => 'errors/403'
+        '/403' => 'errors/403',
+
+        // Chrome Extension API
+        '/api/extension/session/start' => 'api/extension-session-start',
+        '/api/extension/session/action' => 'api/extension-session-action',
+        '/api/extension/session/stop' => 'api/extension-session-stop',
+        '/api/extension/session/status' => 'api/extension-session-status'
     ];
 
     // Check if route exists
