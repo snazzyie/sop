@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Callback - SOP Recorder</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>SOP Recorder</h1>
+                <p id="status-message">Completing sign in...</p>
+            </div>
+
+            <div class="loading-state">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle OAuth callback
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get('success') === 'true') {
+            const token = params.get('token');
+            const userJson = params.get('user');
+
+            if (token && userJson) {
+                try {
+                    const user = JSON.parse(userJson);
+
+                    // Save auth data
+                    localStorage.setItem('authToken', token);
+                    localStorage.setItem('userData', JSON.stringify(user));
+
+                    document.getElementById('status-message').textContent = 'Sign in successful! Redirecting...';
+
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 1000);
+
+                } catch (error) {
+                    document.getElementById('status-message').textContent = 'Error processing sign in';
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                }
+            } else {
+                window.location.href = 'login.html?error=Missing+authentication+data';
+            }
+        } else {
+            const error = params.get('error') || 'Unknown error';
+            window.location.href = 'login.html?error=' + encodeURIComponent(error);
+        }
+    </script>
+</body>
+</html>

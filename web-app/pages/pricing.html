@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - SOP Recorder</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .pricing-hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .pricing-hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .pricing-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: -40px auto 80px;
+            padding: 0 20px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #667eea;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .plan-description {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .plan-price {
+            margin-bottom: 30px;
+        }
+
+        .price-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .price-currency {
+            font-size: 24px;
+            vertical-align: super;
+        }
+
+        .price-period {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .billing-toggle {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .toggle-label {
+            display: inline-block;
+            margin: 0 10px;
+            font-weight: 600;
+        }
+
+        .toggle-label.active {
+            color: #667eea;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .select-plan-btn {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .select-plan-btn:hover {
+            background: #5568d3;
+        }
+
+        .select-plan-btn.current {
+            background: #e5e7eb;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .faq-section {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 20px;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" style="background: transparent; box-shadow: none;">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>SOP Recorder</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Dashboard</a>
+                <a href="pricing.html" class="nav-link active">Pricing</a>
+                <a href="#" id="logout-btn" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="pricing-hero">
+        <h1>Simple, Transparent Pricing</h1>
+        <p>Choose the perfect plan for your documentation needs</p>
+
+        <div class="billing-toggle">
+            <span class="toggle-label active" id="monthly-label">Monthly</span>
+            <label class="switch">
+                <input type="checkbox" id="billing-cycle-toggle">
+                <span class="slider"></span>
+            </label>
+            <span class="toggle-label" id="yearly-label">Yearly <span style="color: #fbbf24;">(Save 17%)</span></span>
+        </div>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="pricing-container">
+        <div class="pricing-grid" id="pricing-grid">
+            <!-- Plans will be loaded here -->
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I change plans at any time?</div>
+                <div class="faq-answer">Yes! You can upgrade or downgrade your plan at any time. Changes will be prorated based on your current billing cycle.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What payment methods do you accept?</div>
+                <div class="faq-answer">We accept all major credit cards (Visa, Mastercard, American Express) through Stripe. Enterprise customers can also pay via invoice.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is there a free trial?</div>
+                <div class="faq-answer">Yes! All paid plans come with a 14-day free trial. No credit card required to start.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens when I reach my limits?</div>
+                <div class="faq-answer">We'll send you a notification when you're approaching your plan limits. You can upgrade at any time to continue without interruption.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I cancel anytime?</div>
+                <div class="faq-answer">Absolutely. You can cancel your subscription at any time from your billing settings. You'll continue to have access until the end of your billing period.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/pricing.js"></script>
+</body>
+</html>

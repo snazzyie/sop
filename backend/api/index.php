@@ -6,11 +6,12 @@ require_once '../config/config.php';
 require_once '../config/database.php';
 require_once '../classes/JWT.php';
 require_once '../classes/Response.php';
+require_once '../classes/Subscription.php';
 
 // Enable CORS
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-API-Key');
 
 // Handle preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -72,14 +73,51 @@ try {
             handleExportsRequest($action, $param, $requestMethod, $requestBody);
             break;
 
+        case 'subscriptions':
+            require_once '../api/subscriptions.php';
+            handleSubscriptionsRequest($action, $param, $requestMethod, $requestBody);
+            break;
+
+        case 'api-keys':
+            require_once '../api/api-keys.php';
+            handleApiKeysRequest($action, $param, $requestMethod, $requestBody);
+            break;
+
+        case 'oauth':
+            // Handle OAuth: /api/oauth/google/login or /api/oauth/google/callback
+            require_once '../api/oauth.php';
+            $provider = $action; // google, github, etc.
+            $oauthAction = $param;
+            handleOAuthRequest($provider, $oauthAction, $requestMethod, $requestBody);
+            break;
+
+        case 'external':
+            // External API with API key auth
+            require_once '../api/external.php';
+            handleExternalRequest($action, $param, $requestMethod, $requestBody);
+            break;
+
         case '':
-            Response::success('SOP Recorder API v1.0', [
+            Response::success('SOP Recorder API v2.0 (SaaS Edition)', [
                 'endpoints' => [
-                    'auth' => ['login', 'register', 'logout'],
+                    'auth' => ['login', 'register', 'logout', 'me'],
+                    'oauth' => ['google/login', 'google/callback'],
                     'sessions' => ['create', 'finalize', 'steps'],
                     'sops' => ['list', 'view', 'update', 'delete'],
+                    'steps' => ['get', 'update', 'delete'],
                     'shares' => ['create', 'view'],
-                    'exports' => ['pdf', 'html', 'markdown']
+                    'exports' => ['pdf', 'html', 'markdown'],
+                    'subscriptions' => ['plans', 'current', 'checkout', 'portal', 'cancel', 'usage', 'webhook'],
+                    'api-keys' => ['list', 'create', 'revoke', 'delete'],
+                    'external' => ['sops', 'steps']
+                ],
+                'features' => [
+                    'subscription_plans' => true,
+                    'stripe_payments' => true,
+                    'google_oauth' => true,
+                    'api_keys' => true,
+                    'usage_tracking' => true,
+                    'feature_restrictions' => true
                 ]
             ]);
             break;

@@ -8,7 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Check for error in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    if (error) {
+        showError(decodeURIComponent(error));
+    }
+
     setupForms();
+    setupOAuth();
 });
 
 function setupForms() {
@@ -128,4 +136,11 @@ function showSuccess(message) {
 function hideMessages() {
     document.getElementById('auth-error').style.display = 'none';
     document.getElementById('auth-success').style.display = 'none';
+}
+
+function setupOAuth() {
+    document.getElementById('google-login-btn')?.addEventListener('click', () => {
+        // Redirect to Google OAuth
+        window.location.href = `${API_BASE_URL}/oauth/google/login`;
+    });
 }
